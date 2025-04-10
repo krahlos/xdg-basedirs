@@ -1,0 +1,4 @@
+# CODEOWNERS file for the xdg-basedir plugin
+
+# Default code owners
+*   @krahlos
