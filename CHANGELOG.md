@@ -12,9 +12,15 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Removed
 ### Fixed
 
+## [0.2.0]
+
+### Fixed
+
+- Portability between `bash` and `zsh` for the `setup_xdg.sh`.
+
 ## [0.1.0]
 
 ### Added
 
 - Initial release of the XDG Directories plugin for `oh-my-zsh`.
-- Support for `xdg_dirs.bash` for bash users.
+- Support for `xdg-basedirs.bash` for bash users.

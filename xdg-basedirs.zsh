@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-PLUGIN_DIR="$( cd "$( dirname "${(%):-%x}" )" && pwd )"
-UTILS_DIR=$PLUGIN_DIR/utils
+source $( cd "$( dirname "${(%):-%x}" )" && pwd )/utils/setup_xdg.sh
 
-source $UTILS_DIR/setup_xdg.sh
+create_xdg_basedirs

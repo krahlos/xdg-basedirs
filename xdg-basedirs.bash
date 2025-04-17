@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-PLUGIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-UTILS_DIR=$PLUGIN_DIR/utils
+source $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/utils/setup_xdg.sh
 
-source $UTILS_DIR/setup_xdg.sh
+create_xdg_basedirs
