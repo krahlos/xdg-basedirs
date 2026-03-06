@@ -15,17 +15,17 @@ create_xdg_basedirs() {
   local red='\033[0;31m'   # Red
   local nc='\033[0m'       # No Color
 
-  for var in \
-    XDG_BIN_HOME \
-    XDG_CACHE_HOME \
-    XDG_CONFIG_HOME \
-    XDG_DATA_HOME \
-    XDG_RUNTIME_DIR \
-    XDG_STATE_HOME; do
+  local entry var dir
+  for entry in \
+    "XDG_BIN_HOME=$XDG_BIN_HOME" \
+    "XDG_CACHE_HOME=$XDG_CACHE_HOME" \
+    "XDG_CONFIG_HOME=$XDG_CONFIG_HOME" \
+    "XDG_DATA_HOME=$XDG_DATA_HOME" \
+    "XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" \
+    "XDG_STATE_HOME=$XDG_STATE_HOME"; do
 
-    # Cross-shell indirect expansion: bash uses ${!var}, zsh uses ${(P)var}
-    local dir
-    eval "dir=\"\${$var}\""
+    var="${entry%%=*}"
+    dir="${entry#*=}"
 
     # Only under $HOME and not already existing
     if [[ $dir == "$HOME/"* && ! -d $dir ]]; then
