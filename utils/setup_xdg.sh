@@ -12,6 +12,7 @@ create_xdg_basedirs() {
   # ANSI color codes
   local green='\033[0;32m' # Green
   local cyan='\033[0;36m'  # Cyan
+  local red='\033[0;31m'   # Red
   local nc='\033[0m'       # No Color
 
   for var in \
@@ -22,14 +23,21 @@ create_xdg_basedirs() {
     XDG_RUNTIME_DIR \
     XDG_STATE_HOME; do
 
-    local dir="${!var}"
+    # Cross-shell indirect expansion: bash uses ${!var}, zsh uses ${(P)var}
+    local dir
+    eval "dir=\"\${$var}\""
 
     # Only under $HOME and not already existing
     if [[ $dir == "$HOME/"* && ! -d $dir ]]; then
-      mkdir -p "$dir"
-      printf '[%b%s%b] Created directory: %b%s%b\n' \
-        "$green" "$var" "$nc" \
-        "$cyan" "$dir" "$nc"
+      if mkdir -p "$dir"; then
+        printf '[%b%s%b] Created directory: %b%s%b\n' \
+          "$green" "$var" "$nc" \
+          "$cyan" "$dir" "$nc"
+      else
+        printf '[%b%s%b] Failed to create directory: %b%s%b\n' \
+          "$red" "$var" "$nc" \
+          "$cyan" "$dir" "$nc" >&2
+      fi
     fi
   done
 }
